@@ -7,3 +7,4 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/hello', 'Home::hello');
+$routes->post('/insert', 'Home::insert');

@@ -1,0 +1,72 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+For removing the index.php from the url 
+
+Step 1 Config/App.php
+public string $baseURL = 'http://localhost/ci4/';
+ public string $indexPage = '';
+ public string $uriProtocol = 'PATH_INFO';
+
+ Step 2 Move index.php and .htaccess file from the public folder to the root (ci4/)
+
+ Step 3 index.php
+ require FCPATH . '/app/Config/Paths.php';
+
+ Now I my http://localhost/ci4/ url is calling the Home/index -> message.php
+ --------------------------------------------------------------------------------------------------------------------------------------------------
+
+ --------------------------------------------------------------------------------------------------------------------------------------------------
+ How to use Migrate or create table using Migrate
+
+Step 1 Create database like ci4
+
+ Step 2 .env file
+
+ CI_ENVIRONMENT = development from production to development
+
+ Uncomment these line and fill necessary data 
+ database.default.hostname = localhost
+database.default.database = ci4
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+
+Step 3 php spark make:migrate Name-of-migrate
+it will create a migration file with some code 
+
+php spark migrate status
+
+Step 4 php spark migrate
+For deleting the table i have to run php spark migrate:rollback 
+For creating table i have to run php spark migrate
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+How to insert data in database
+
+Step 1 First of all have a table 
+
+Step 2 create a Model for that table by php spark make:model UserModel
+it will create a model with UserModel name and i have to write atleast this code in this model 
+these are the details of my table so the name should be matched with my table
+protected $table            = 'user';
+    protected $primaryKey       = 'id';
+      protected $allowedFields    = ['name','city'];
+
+      Step 3 create a form inside the message.php or inside the Views
+
+      Step 4 now create a function for inserting data inside the Home controller 
+      first import the UserModel by writing use App\Models\UserModel;
+      create a function of any name of choice 
+      inside the function make an array in key value pair key should represent the table column and match with them as it is and value represent the value from the form
+      create the object of UserModel and call the insert method by passing that array into it 
+      noe echo a message of success 
+
+      Step 4 Define a route form this like
+       $routes->post('/insert', 'Home::insert');
+
+       --------------------------------------------------------------------------------------------------------------------------------------------
+
+       
