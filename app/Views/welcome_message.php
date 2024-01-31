@@ -16,5 +16,7 @@
         <br>
         <input type="submit" value="Insert Data" name="submit">
     </form>
+
+    <button><a href="<?=  base_url('show')  ?>">Show Data</a></button>
 </body>
 </html>
